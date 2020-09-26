@@ -19,8 +19,10 @@
 		<version.restassured>4.3.1</version.restassured>
 		<version.lombok>1.18.12</version.lombok>
 		<version.jackson>2.11.0.rc1</version.jackson>
+		 <version.cucumber>6.1.1</version.cucumber>
 		<!--- Plugin versions -->
 		<version.maven-compiler>3.8.1</version.maven-compiler>
+		<version.maven-cucumber-reporting>3.4.0</version.maven-cucumber-reporting>
 	</properties>
 
 	<build>
@@ -31,9 +33,27 @@
 				<version>${version.maven-compiler}</version>
 				<configuration>
 					<source>${version.java}</source>
-					<target>${version.java</target>
+					<target>${version.java}</target>
 				</configuration>
 			</plugin>
+			 <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${version.maven-cucumber-reporting}</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>automated-api-testing</projectName>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                        </configuration>
+                      </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
@@ -61,5 +81,15 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${version.jackson}</version>
 		</dependency>
+		  <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${version.cucumber}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${version.cucumber}</version>
+        </dependency>
 	</dependencies>
 </project>
